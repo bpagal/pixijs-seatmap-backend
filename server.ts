@@ -6,20 +6,21 @@ import cors from "cors";
 const app = express();
 const server = createServer(app);
 
-const LOCAL_URL = "http://localhost:5173";
-const LIVE_URL = "https://pixijs-seatmap-backend.onrender.com/";
+const LOCAL_FE_URL = "http://localhost:5173";
+const LIVE_FE_URL = "http://pixijs-seatmap-cloud.s3-website-ap-southeast-2.amazonaws.com/";
+const origins = [LOCAL_FE_URL,LIVE_FE_URL]
 
 // Configure CORS for Socket.io with your actual S3 domain
 const io = new Server(server, {
   cors: {
-    origin: [LOCAL_URL, LIVE_URL],
+    origin: origins,
     methods: ["GET", "POST"],
     credentials: true,
   },
 });
 
 // Enable CORS for Express routes
-app.use(cors({ origin: [LOCAL_URL, LIVE_URL] }));
+app.use(cors({ origin: origins }));
 
 // Health check endpoints (required for Elastic Beanstalk)
 app.get("/", (_, res) => {
