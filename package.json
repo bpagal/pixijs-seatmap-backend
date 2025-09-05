@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node dist/server.js",
-    "build": "node build.js",
+    "build": "tsc",
     "dev": "tsx server.ts"
   },
   "dependencies": {
